@@ -1,10 +1,10 @@
-export default function Ship() {
-  const length = len;
-  let isSunk = false;
-  const xCord = x;
-  const yCord = y;
+const Ship = (coords) => {
+  const blocks = coords.map((value, index) => {
+    return {[index]: value, "hit": false}
+  });
 
-  const hit = (x, y) => {
+  const len = coords.length;
+  const isHit = (x, y) => {
     return null;
   }
 
@@ -13,6 +13,8 @@ export default function Ship() {
   }
 
   return {
-    xCord, yCord, hit, isSunk
+    blocks, len
   }
 }
+
+module.exports = Ship;
