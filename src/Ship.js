@@ -1,19 +1,32 @@
 const Ship = (coords) => {
-  const blocks = coords.map((value, index) => {
+  const blocks = coords.map((value) => {
     return {"value": value, "hit": false}
   });
 
-  const len = coords.length;
+  let hits = 0;
+  
+  let sunk = false;
+
   const isHit = (x, y) => {
-    return null;
-  }
+    let found = false;
+    blocks.forEach((item) => {
+      if (item["value"][0] == x && item["value"][1] == y) {
+        found = true;
+        hits++;
+        item["hit"] = true;
+        if (hits == blocks.length) {
+          sunk = true;
+        }
+      }
+    });
+    return found;
+  };
 
-  const isSunk = () => {
-
-  }
+  const getBlocks = () => blocks;
+  const isSunk = () => sunk;
 
   return {
-    blocks, len
+    getBlocks, isHit, isSunk
   }
 }
 
