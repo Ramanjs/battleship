@@ -16,11 +16,11 @@ const Gameboard = (playerName) => {
     return true;
   };
 
-  const isMarked = () => {
-
+  const newShip = (ship) => {
+    ships.push(ship);
   };
 
-  const makeShips = () => {
+  const isMarked = () => {
 
   };
 
@@ -36,8 +36,43 @@ const Gameboard = (playerName) => {
     }
   };
 
-  const generateShipStartPoint = () => {
+  const generateCoordinates = (start, len, dir) => {
+    const coords = [start];
+    if (dir) {
+      for (let i = 1; i < len; i++) {
+        coords.push([start[0], start[1] + i]);
+      }
+    } else {
+      for (let i = 1; i < len; i++) {
+        coords.push([start[0] + i, start[1]]);
+      }
+    }
+    return coords;
+  };
 
+  const isValidShip = (coords) => {
+    for (const ship of ships) {
+      blocks = ship.getBlocks();
+      for (const block of blocks) {
+        coord = block["value"];
+        for (const x of coords) {
+          if (x == coord) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  };
+
+  const makeShip = (len, dir) => {
+    while(true) {
+      start = generateRandomPoint();
+      coords = generateCoordinates(start, len, dir);
+      if (isValidShip(coords)) {
+        return coords;
+      }
+    }
   };
 
   const getMarked = () => marked;
@@ -48,7 +83,7 @@ const Gameboard = (playerName) => {
   const getName = () => name;
 
   return {
-    getName, isValidHit, getMarked, setMarked, generateRandomPoint
+    getName, isValidHit, getMarked, setMarked, generateRandomPoint, makeShip, newShip
   }
 };
 

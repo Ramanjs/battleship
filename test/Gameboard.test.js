@@ -24,3 +24,8 @@ test('test generateRandomPoint', () => {
   coords = gameboard.generateRandomPoint();
   expect(gameboard.isValidHit(coords[0], coords[1])).toBe(true);
 });
+
+test('test makeShip length', () => {
+  const gameboard = Gameboard("Player");
+  expect(gameboard.makeShip(4, false).length).toBe(4);
+})
