@@ -29,7 +29,11 @@ const Gameboard = (playerName) => {
   };
 
   const generateRandomPoint = () => {
-
+    while(true) {
+      let x = Math.floor((Math.random() * 10) + 1);
+      let y = Math.floor((Math.random() * 10) + 1);
+      if (isValidHit(x, y)) return [x, y]
+    }
   };
 
   const generateShipStartPoint = () => {
@@ -44,7 +48,7 @@ const Gameboard = (playerName) => {
   const getName = () => name;
 
   return {
-    getName, isValidHit, getMarked, setMarked
+    getName, isValidHit, getMarked, setMarked, generateRandomPoint
   }
 };
 

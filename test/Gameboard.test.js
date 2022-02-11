@@ -17,3 +17,10 @@ test('test isValidHit with valid attack', () => {
   gameboard.setMarked(4, 5);
   expect(gameboard.isValidHit(7, 2)).toBe(true);
 });
+
+test('test generateRandomPoint', () => {
+  const gameboard = Gameboard("Player");
+  gameboard.setMarked(4, 5);
+  coords = gameboard.generateRandomPoint();
+  expect(gameboard.isValidHit(coords[0], coords[1])).toBe(true);
+});
