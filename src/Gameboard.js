@@ -7,6 +7,15 @@ const Gameboard = (playerName) => {
 
   };
 
+  const isValidHit = (x, y) => {
+    for (const coord of marked) {
+      if (coord[0] == x && coord[1] == y) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   const isMarked = () => {
 
   };
@@ -27,10 +36,15 @@ const Gameboard = (playerName) => {
 
   };
 
+  const getMarked = () => marked;
+  const setMarked = (x, y) => {
+    marked.push([x, y]);
+  };
+
   const getName = () => name;
 
   return {
-    getName
+    getName, isValidHit, getMarked, setMarked
   }
 };
 
