@@ -3,8 +3,17 @@ const Gameboard = (playerName) => {
   const marked = [];
   const ships = [];
 
-  const receiveAttack = () => {
-
+  const receiveAttack = (x, y) => {
+    for (const ship of ships) {
+      if (ship.isHit(x, y)) {
+        if (ship.isSunk()) {
+          return [true, true, ship]
+        } else {
+          return [true, false, ship];
+        }
+      }
+    }
+    return [false];
   };
 
   const isValidHit = (x, y) => {
@@ -20,12 +29,13 @@ const Gameboard = (playerName) => {
     ships.push(ship);
   };
 
-  const isMarked = () => {
-
-  };
-
   const isGameOver = () => {
-
+    for (const ship of ships) {
+      if (!ship.isSunk()) {
+        return false;
+      }
+    }
+    return true;
   };
 
   const generateRandomPoint = () => {
@@ -83,7 +93,7 @@ const Gameboard = (playerName) => {
   const getName = () => name;
 
   return {
-    getName, isValidHit, getMarked, setMarked, generateRandomPoint, makeShip, newShip
+    getName, isValidHit, getMarked, setMarked, generateRandomPoint, makeShip, newShip, receiveAttack, isGameOver
   }
 };
 
