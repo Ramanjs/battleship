@@ -75,7 +75,7 @@ const Gameboard = (playerName) => {
     }
   };
 
-  const getMarked = () => marked;
+  const getMarked = () => marked.slice();
   const setMarked = (x, y) => {
     marked.push([x, y]);
   };

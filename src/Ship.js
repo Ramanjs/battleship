@@ -22,8 +22,8 @@ const Ship = (coords) => {
     return found;
   };
 
-  const getBlocks = () => blocks;
-  const isSunk = () => sunk;
+  const getBlocks = () => blocks.slice();
+  const isSunk = () => sunk.valueOf();
 
   return {
     getBlocks, isHit, isSunk
