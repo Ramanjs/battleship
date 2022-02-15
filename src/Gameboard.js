@@ -78,6 +78,15 @@ const Gameboard = (playerName) => {
   const makeShip = (len, dir) => {
     while(true) {
       start = generateRandomPoint();
+      if (dir) {
+        if (start[1] + len > 11) {
+          continue;
+        }
+      } else {
+        if (start[0] + len > 11) {
+          continue;
+        }
+      }
       coords = generateCoordinates(start, len, dir);
       if (isValidShip(coords)) {
         return coords;
@@ -91,9 +100,9 @@ const Gameboard = (playerName) => {
   };
 
   const getName = () => name;
-
+  const getShips = () => ships;
   return {
-    getName, isValidHit, getMarked, setMarked, generateRandomPoint, makeShip, newShip, receiveAttack, isGameOver
+    getName, isValidHit, getMarked, setMarked, generateRandomPoint, makeShip, newShip, receiveAttack, isGameOver, getShips
   }
 };
 
