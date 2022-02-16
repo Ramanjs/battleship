@@ -69,26 +69,52 @@ const processHit = (coords) => {
   const y = parseInt(coords.slice(coords.indexOf(',') + 1));
   console.log(x);
   console.log(y);
-  if (coords[0] == 'C') {
-    if (compBoard.isValidHit(x, y)){
-      const result = compBoard.receiveAttack(x, y);
-      console.log(result);
-      compDom.updateShip(result[2]);
+  if (compBoard.isValidHit(x, y)){
+    const result = compBoard.receiveAttack(x, y);
+    console.log(result);
+    compDom.updateBoard(result);
+    if (compBoard.isGameOver()) {
+      window.alert("You won");
     }
   } else {
-
+    return;
   }
-}
-
-const updateDom = () => {
-
+  compAttack();
 };
 
-makeShips(playerBoard);
-playerDom.render();
-playerDom.renderShips(playerBoard.getShips());
-makeShips(compBoard);
-compDom.render();
-compDom.renderShips(compBoard.getShips());
+const generateAttack = () => {
+  const coords = playerBoard.generateRandomPoint();
+  return coords;
+};
 
-activateShips();
+const compAttack = () => {
+  const coords = generateAttack();
+  console.log(coords);
+  const result = playerBoard.receiveAttack(coords[0], coords[1]);
+  console.log(result);
+  playerDom.updateBoard(result);
+  if (playerBoard.isGameOver()) {
+    window.alert("Computer Won")
+  }
+};
+
+const init = () => {
+  makeShips(playerBoard);
+  playerDom.render();
+  playerDom.renderShips(playerBoard.getShips());
+  makeShips(compBoard);
+  compDom.render();
+  activateShips();
+  compDom.renderShips(compBoard.getShips());
+  //let playerTurn = true;
+
+  //while(true) {
+    //if (playerTurn) {
+      //playerTurn = false;
+    //} else {
+      //playerTurn = true;
+    //}
+  //}
+};
+
+init();

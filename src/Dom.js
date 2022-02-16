@@ -33,35 +33,44 @@ const Dom = (user) => {
     });
   };
 
-  const updateShip = (ship) => {
-    if (ship.isSunk()) {
-      const blocks = ship.getBlocks();
-      blocks.forEach((item) => {
-        const x = item['value'][0];
-        const y = item['value'][1];
-        const id = player[0] + x + y; 
-        const box = document.querySelector('#' + id);
-        box.classList.add('sunk');
-      });
-    } else {
-      const blocks = ship.getBlocks();
-      blocks.forEach((item) => {
-        const x = item['value'][0];
-        const y = item['value'][1];
-        const id = player[0] + x + y; 
-        const box = document.querySelector('#' + id);
-        if (item['hit'] == true && !box.classList.contains('hit')) {
-          box.classList.add('hit');
-        }
+  const updateBoard = (result) => {
+    if (result[0]) {
+      const ship = result[2];
+      if (ship.isSunk()) {
+        const blocks = ship.getBlocks();
+        blocks.forEach((item) => {
+          const x = item['value'][0];
+          const y = item['value'][1];
+          const id = player[0] + x + y; 
+          const box = document.querySelector('#' + id);
+          box.classList.add('sunk');
+        });
+      } else {
+        const blocks = ship.getBlocks();
+        blocks.forEach((item) => {
+          const x = item['value'][0];
+          const y = item['value'][1];
+          const id = player[0] + x + y; 
+          const box = document.querySelector('#' + id);
+          if (item['hit'] == true && !box.classList.contains('hit')) {
+            box.classList.add('hit');
+          }
 
-      });
+        });
+      }
+    } else {
+      const id = player[0] + result[1][0] + result[1][1];
+      console.log(id);
+      const box = document.querySelector('#' + id);
+      box.classList.add('empty');
     }
-  }
+
+  };
 
   return {
     render, 
     renderShips,
-    updateShip
+    updateBoard
   }
 };
 
