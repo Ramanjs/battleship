@@ -8,7 +8,6 @@ const Gameboard = (playerName) => {
     for (const ship of ships) {
       if (ship.isHit(x, y)) {
         if (ship.isSunk()) {
-          marked.push(x, y);
           return [true, true, ship]
         } else {
           return [true, false, ship];
@@ -19,6 +18,9 @@ const Gameboard = (playerName) => {
   };
 
   const isValidHit = (x, y) => {
+    if (x > 10 || y > 10 || x < 1 || y < 1) {
+      return false;
+    }
     for (const coord of marked) {
       if (coord[0] == x && coord[1] == y) {
         return false;
@@ -67,11 +69,56 @@ const Gameboard = (playerName) => {
 
   const isValidShip = (coords) => {
     for (const ship of ships) {
-      blocks = ship.getBlocks();
+      const blocks = ship.getBlocks();
       for (const block of blocks) {
-        coord = block["value"];
+        //let coord = block["value"];
         for (const x of coords) {
-          if (x == coord) {
+          //console.log(1, coord);
+          //console.log(x);
+          //console.log([x[0] + 1, x[1]]);
+          //console.log([x[0] - 1, x[1]]);
+          //console.log([x[0], x[1] + 1]);
+          //console.log([x[0], x[1] - 1]);
+          //console.log([x[0] + 1, x[1] + 1]);
+          //console.log([x[0] - 1, x[1] + 1]);
+          //console.log([x[0] + 1, x[1] - 1]);
+          //console.log([x[0] - 1, x[1] - 1]);
+          const coord = JSON.stringify(block["value"]);
+          //console.log(coord);
+          if (JSON.stringify(x) == coord) {
+            console.log(false);
+            return false;
+          }
+          if (JSON.stringify([x[0] + 1, x[1]]) == coord){
+            console.log(false);
+            return false;
+          }
+          if (JSON.stringify([x[0] - 1, x[1]]) == coord) {
+            console.log(false);
+            return false;
+          }
+          if (JSON.stringify([x[0], x[1] + 1]) == coord) {
+            console.log(false);
+            return false;
+          }
+          if (JSON.stringify([x[0], x[1] - 1]) == coord) {
+            console.log(false);
+            return false;
+          }
+          if (JSON.stringify([x[0] + 1, x[1] + 1]) == coord) {
+            console.log(false);
+            return false;
+          }
+          if (JSON.stringify([x[0] + 1, x[1] - 1]) == coord) {
+            console.log(false);
+            return false;
+          }
+          if (JSON.stringify([x[0] - 1, x[1] + 1]) == coord) {
+            console.log(false);
+            return false;
+          }
+          if (JSON.stringify([x[0] - 1, x[1] - 1]) == coord) {
+            console.log(false);
             return false;
           }
         }
@@ -82,7 +129,7 @@ const Gameboard = (playerName) => {
 
   const makeShip = (len, dir) => {
     while(true) {
-      start = generateRandomPoint();
+      const start = generateRandomPoint();
       if (dir) {
         if (start[1] + len > 11) {
           continue;
@@ -92,8 +139,9 @@ const Gameboard = (playerName) => {
           continue;
         }
       }
-      coords = generateCoordinates(start, len, dir);
+      const coords = generateCoordinates(start, len, dir);
       if (isValidShip(coords)) {
+        console.log(coords);
         return coords;
       }
     }

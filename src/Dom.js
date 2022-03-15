@@ -4,7 +4,7 @@ const Dom = (user) => {
 
   const render = () => {
     for (let i = 1; i <= 100; i++) {
-      const box = document.createElement('div');
+      const box = document.createElement('span');
       box.classList.add('box');
       let id = '';
       if (player == 'Computer') {
@@ -55,7 +55,6 @@ const Dom = (user) => {
           if (item['hit'] == true && !box.classList.contains('hit')) {
             box.classList.add('hit');
           }
-
         });
       }
     } else {

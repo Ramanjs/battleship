@@ -12,37 +12,86 @@ html, body {
 }
  
 .gameboard {
-    width: 25vw;
-    height: 25vw;
+    min-width: 340px;
+    min-height: 340px;
     display: grid;
     margin: 75px;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-    border-collapse: collapse;
+    border: none;
     background-color: white;
 }
 
 .box {
-  border-style: solid;
-  border-width: 1px;
+  border: 1px solid #b4b4ff;
   border-collapse: collapse;
 }
 
 .ship {
-  background-color: rgba(0,0,255,0.2);
+  border: 2px solid #00f;
+  background-color: rgba(0,0,255,0.05);
 }
 
-.hit {
-  background-color: rgba(255,0,255,0.2);
-}
-
-.sunk {
-  background-color: rgba(255,0,0,0.2);
+span {
+  padding: 0;
+  margin: 0;
 }
 
 .empty {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(10, 10, 10, 0.1);
+}
+
+.hit {
+    position: relative;
+    height: 30px; /* this can be anything */
+    width: 30px;  /* ...but maintain 1:1 aspect ratio */
+    border-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hit::before,
+.hit::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 2px; /* cross thickness */
+    background-color: red;
+}
+
+.hit::before {
+    transform: rotate(45deg);
+}
+
+.hit::after {
+    transform: rotate(-45deg);
+}
+
+.sunk {
+    position: relative;
+    height: 30px; /* this can be anything */
+    width: 30px;  /* ...but maintain 1:1 aspect ratio */
+    border-color: black;
+    background-color: rgba(0,0,255,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sunk::before,
+.sunk::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 2px; /* cross thickness */
+    background-color: black;
+}
+
+.sunk::before {
+    transform: rotate(45deg);
+}
+
+.sunk::after {
+    transform: rotate(-45deg);
 }
