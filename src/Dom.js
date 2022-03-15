@@ -59,7 +59,6 @@ const Dom = (user) => {
       }
     } else {
       const id = player[0] + result[1][0] + result[1][1];
-      console.log(id);
       const box = document.querySelector('#' + id);
       box.classList.add('empty');
     }

@@ -34,11 +34,8 @@ const Gameboard = (playerName) => {
   };
 
   const isGameOver = () => {
-    console.log(ships);
     for (let ship of ships) {
-      console.log(ship);
       if (!ship.isSunk()) {
-        console.log(ship.isSunk());
         return false;
       }
     }
@@ -71,46 +68,27 @@ const Gameboard = (playerName) => {
     for (const ship of ships) {
       const blocks = ship.getBlocks();
       for (const block of blocks) {
-        //let coord = block["value"];
         for (const x of coords) {
-          //console.log(1, coord);
-          //console.log(x);
-          //console.log([x[0] + 1, x[1]]);
-          //console.log([x[0] - 1, x[1]]);
-          //console.log([x[0], x[1] + 1]);
-          //console.log([x[0], x[1] - 1]);
-          //console.log([x[0] + 1, x[1] + 1]);
-          //console.log([x[0] - 1, x[1] + 1]);
-          //console.log([x[0] + 1, x[1] - 1]);
-          //console.log([x[0] - 1, x[1] - 1]);
           const coord = JSON.stringify(block["value"]);
-          //console.log(coord);
           if (JSON.stringify(x) == coord) {
-            console.log(false);
             return false;
           }
           if (JSON.stringify([x[0] + 1, x[1]]) == coord){
-            console.log(false);
             return false;
           }
           if (JSON.stringify([x[0] - 1, x[1]]) == coord) {
-            console.log(false);
             return false;
           }
           if (JSON.stringify([x[0], x[1] + 1]) == coord) {
-            console.log(false);
             return false;
           }
           if (JSON.stringify([x[0], x[1] - 1]) == coord) {
-            console.log(false);
             return false;
           }
           if (JSON.stringify([x[0] + 1, x[1] + 1]) == coord) {
-            console.log(false);
             return false;
           }
           if (JSON.stringify([x[0] + 1, x[1] - 1]) == coord) {
-            console.log(false);
             return false;
           }
           if (JSON.stringify([x[0] - 1, x[1] + 1]) == coord) {
@@ -118,7 +96,6 @@ const Gameboard = (playerName) => {
             return false;
           }
           if (JSON.stringify([x[0] - 1, x[1] - 1]) == coord) {
-            console.log(false);
             return false;
           }
         }
@@ -141,7 +118,6 @@ const Gameboard = (playerName) => {
       }
       const coords = generateCoordinates(start, len, dir);
       if (isValidShip(coords)) {
-        console.log(coords);
         return coords;
       }
     }
